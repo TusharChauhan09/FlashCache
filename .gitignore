@@ -1,0 +1,18 @@
+# binaries
+*.exe
+*.out
+*.test
+
+# build
+dist/
+bin/
+
+# docker
+.env
+
+# editor
+.vscode/
+.idea/
+
+# os
+.DS_Store
