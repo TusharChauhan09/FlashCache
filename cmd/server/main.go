@@ -1,9 +1,20 @@
 package main
 
 import (
-	"fmt"
+	"log"
+
+	config "github.com/TusharChauhan09/flashcache/internal/config"
+	"github.com/TusharChauhan09/flashcache/internal/server"
+	"github.com/TusharChauhan09/flashcache/internal/store"
 )
 
 func main(){
-	fmt.Println("Hello, World!")
+
+	cfg := config.LoadConfig()
+
+	st := store.New()
+
+	srv := server.New(cfg,st)
+
+	log.Fatal(srv.Start())
 }
