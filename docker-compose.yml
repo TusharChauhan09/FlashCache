@@ -1,0 +1,14 @@
+services:
+  
+  flashcache:
+    
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    container_name: flashcache
+
+    ports:
+      - "6379:6379"
+      
+    restart: unless-stopped
