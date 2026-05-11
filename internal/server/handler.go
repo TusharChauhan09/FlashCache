@@ -13,9 +13,12 @@ func (s *Server) Handle(conn net.Conn){
 	defer conn.Close()
 	fmt.Printf("client connected: %s\n",conn.RemoteAddr())
 
+	s.metrics.IncrementConnections()
+
 	scanner := bufio.NewScanner(conn)
 
 	for scanner.Scan(){ // scans until sender keeps on sending 
+		s.metrics.IncrementRequests()  
 		input := scanner.Text()  // gets the line : Raw Sting 
 
 		cmd,err := protocol.Parse(input)

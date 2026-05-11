@@ -56,7 +56,11 @@ func (s *Server) Route(cmd *protocol.Command) string {
 		return protocol.Integer(length)
 
 	case "STATS":
-		return protocol.Value("FlashCache running")
+		keys := s.store.KeyCount()
+		queues := s.store.QueueCount()
+		stats := s.metrics.Stats(keys,queues)
+
+		return protocol.Value(stats)
 
 	default:
 		return protocol.Error(fmt.Errorf("unknown command"))
